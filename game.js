@@ -409,11 +409,3 @@ function gameLoop() {
     displayGameInfo(); requestAnimationFrame(gameLoop);
 }
 initializeFactories(); gameLoop();
-// --- ここから追加 ---
-window.onload = () => {
-    const loadingMessage = document.getElementById('loadingMessage');
-    if (loadingMessage) {
-        loadingMessage.style.display = 'none';
-    }
-};
-// --- ここまで追加 ---
