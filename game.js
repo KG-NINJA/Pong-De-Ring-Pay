@@ -324,4 +324,39 @@ function gameLoop() {
 }
 
 initializeWarehouses();
+
+
+class EnemyFighter {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.width = 40;
+        this.height = 20;
+        this.speed = 5; // Faster than the helicopter
+        this.turnSpeed = 2; // Inferior turning capabilities
+        this.color = 'red';
+        this.health = 50;
+    }
+
+    draw(ctx) {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+
+    update() {
+        // Simple AI to move towards the player
+        let dx = player.x - this.x;
+        let dy = player.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance > 0) {
+            dx /= distance;
+            dy /= distance;
+            this.x += dx * this.speed;
+            this.y += dy * this.speed;
+        }
+        // Attack logic will be added here later
+    }
+}
+
+
 gameLoop();
