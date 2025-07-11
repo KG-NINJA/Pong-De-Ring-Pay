@@ -225,9 +225,9 @@ window.addEventListener('keyup', (e) => {
 });
 
 function gameLoop() {
-    // Calculate the viewport offset to keep the helicopter centered
-    let offsetX = Math.min(Math.max(player.x + player.width / 2 - canvas.width / 2, 0), GAME_WIDTH - canvas.width);
-    let offsetY = Math.min(Math.max(player.y + player.height / 2 - canvas.height / 2, 0), GAME_HEIGHT - canvas.height);
+    // Ensure the viewport does not scroll beyond the game area boundaries
+    let offsetX = Math.max(0, Math.min(player.x + player.width / 2 - canvas.width / 2, GAME_WIDTH - canvas.width));
+    let offsetY = Math.max(0, Math.min(player.y + player.height / 2 - canvas.height / 2, GAME_HEIGHT - canvas.height));
 
     // Clear the visible area of the game
     ctx.clearRect(0, 0, canvas.width, canvas.height);
