@@ -2,6 +2,9 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 // Set canvas dimensions
+// Define larger game area
+const GAME_WIDTH = 1600;
+const GAME_HEIGHT = 1200;
 canvas.width = 800;
 canvas.height = 600;
 
@@ -222,8 +225,20 @@ window.addEventListener('keyup', (e) => {
 });
 
 function gameLoop() {
+    // Calculate the viewport offset to keep the helicopter centered
+    let offsetX = Math.min(Math.max(player.x + player.width / 2 - canvas.width / 2, 0), GAME_WIDTH - canvas.width);
+    let offsetY = Math.min(Math.max(player.y + player.height / 2 - canvas.height / 2, 0), GAME_HEIGHT - canvas.height);
+
+    // Clear the visible area of the game
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Set the context to draw relative to the viewport
+    ctx.save();
+    ctx.translate(-offsetX, -offsetY);
+
+    // Background fill for the entire game area (not just the visible part)
     ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
     if (player) {
         player.update();
